@@ -28,12 +28,6 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
                                         System.Drawing.FontStyle.Regular,
                                         System.Drawing.GraphicsUnit.Point)
 
-        self._text_box_font = System.Drawing.Font(
-                                        'Arial',
-                                        System.Single(12),
-                                        System.Drawing.FontStyle.Bold,
-                                        System.Drawing.GraphicsUnit.Point)
-
         self._label_comment_stair = System.Windows.Forms.Label()
         self._label_comment_stair.Text = 'Укажите в строке ниже, номера групп,\
                                         \nкоторые ИДУТ ВНЕ СТОЯКА, например ПО ЛЕСТНИЦАМ.\
@@ -51,7 +45,7 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
         self._text_box_stair.Font = System.Drawing.Font(self._text_box_stair.Font.FontFamily, 12)
         self.Controls.Add(self._text_box_stair)
         user_list_stair = dict_from_json["list_stair"]
-        self._text_box_stair.Text = ','.join(user_list_stair)
+        self._text_box_stair.Text = ','.join(user_list_stair).replace('гр.', '')
 
         self._label_info_stair = System.Windows.Forms.Label()
         self._label_info_stair.Text = '  Для напоминания.\
@@ -87,7 +81,7 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
         self._text_box_exclude.Size = System.Drawing.Size(400,100)
         self._text_box_exclude.Font = System.Drawing.Font(self._text_box_stair.Font.FontFamily, 12)
         user_list_exclude = dict_from_json["delete_from_right_stoyak"]
-        self._text_box_exclude.Text = ','.join(user_list_exclude)
+        self._text_box_exclude.Text = ','.join(user_list_exclude).replace('гр.', '')
         self.Controls.Add(self._text_box_exclude)
 
         self._label_info_exclude = System.Windows.Forms.Label()
@@ -155,9 +149,9 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
         # удалили все пробелы из строки
         user_string_stair = self._text_box_stair.Text.replace(' ', '')
         # из строки сделали список строк и добавили в словарь
-        dict_user["list_stair"] = user_string_stair.split (',')
+        dict_user["list_stair"] = ['гр.' + el_str for el_str in user_string_stair.split (',')]
         user_string_exclude = self._text_box_exclude.Text.replace(' ', '')
-        dict_user["delete_from_right_stoyak"] = user_string_exclude.split (',')
+        dict_user["delete_from_right_stoyak"] = ['гр.' + elem_str for elem_str in user_string_exclude.split (',')]
 
         self.dict_user_select = dict_user
 
@@ -191,4 +185,5 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
 if __name__ == "__main__":
     f = UserFormTopBottomLevels()
     f.ShowDialog()
-    print(f.dict_user_select)
+    for el in f.dict_user_select["list_stair"]:
+        print(el)
