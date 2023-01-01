@@ -3,7 +3,6 @@ import clr
 clr.AddReference('System.Drawing')
 clr.AddReference('System.Windows.Forms')
 
-import System
 import System.Drawing
 import System.Windows.Forms
 
@@ -58,7 +57,7 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
         self.offset = 400
 
         self._label_exclude = System.Windows.Forms.Label()
-        self._label_exclude.Text = 'Вариант для двух стояков в здании.\
+        self._label_exclude.Text = 'Дополнительно, когда два стояка в здании.\
                                         \nИСКЛЮЧИТЬ ГРУППЫ ИЗ ПРАВОГО/ВТОРОГО СТОЯКА.\
                                         \nЗапишите через запятую, без пробелов, в следующем виде: 16,18\
                                         \nСокращение гр. к каждой группе писать не надо, только номер.'
@@ -74,10 +73,10 @@ class UserFormTopBottomLevels(System.Windows.Forms.Form):
         self.Controls.Add(self._text_box_exclude)
 
         self._label_info_exclude = System.Windows.Forms.Label()
-        self._label_info_exclude.Text = '  Для примера:\
-                                    \nнапример, гр.16 - на первом этаже из-за сложного ветвления\
-                                    \nпопала в баундингбокс, в то время,\
-                                    \nкак идет она в стояке, который вне баундингбокса'
+        self._label_info_exclude.Text = '  Для примера.\
+                                    \nНапример, гр.16 - на первом этаже из-за сложного ветвления\
+                                    \nпопала в баундингбокс, в то время как идет она в стояке,\
+                                    \nкоторый вне баундингбокса'
         self._label_info_exclude.Font = self._label_font
         self._label_info_exclude.Location = System.Drawing.Point(30, 110 + self.offset)
         self._label_info_exclude.Size = System.Drawing.Size(
